@@ -1,63 +1,64 @@
-
 # Image Size Filter Script
 
-This Python script was developed to automate the process of selecting images during the preparation of datasets for training LoRA models. It automatically filters images based on their dimensions, copying only those that meet the minimum requirements into a separate folder.
+This Python script automates the image selection process by filtering images based on their dimensions. It automatically copies images that meet minimum size requirements to a separate folder, making it particularly useful for preparing datasets for LoRA model training.
 
 ## Problem Solved
 
-When collecting images for training LoRA models, entire galleries of images with various sizes are often downloaded. Manually checking and selecting images that meet the minimum requirements (512x512 pixels) can be time-consuming. This script fully automates this process.
+When collecting images for LoRA model training, you often download entire galleries containing files of various sizes. This script automatically filters images that meet the minimum requirements (512x512 pixels), eliminating the need for manual verification.
 
 ## Features
 
-- Analyzes all images in the specified folder
+- Automatically analyzes all images in the current working directory
 - Verifies that both dimensions (width and height) are >= 512 pixels
 - Automatically creates an "ok" subfolder for valid images
-- Copies (does not move) images that meet the requirements into the "ok" folder
+- Copies (doesn't move) qualifying images to the "ok" folder
 - Keeps the original folder intact
-- Provides real-time feedback on performed operations
+- Provides real-time feedback on operations
+- Processes files in parallel for improved performance
 
 ## Requirements
 
 - Python 3.x
 - Pillow (PIL) library
-- Operating system: Windows/Linux/MacOS
+- Operating System: Windows/Linux/MacOS
 
 ## Installation
 
-1. Make sure Python is installed
-2. Install the Pillow library if not already installed:
+1. Ensure Python is installed
+2. Install the Pillow library if not present:
 ```bash
 pip install Pillow
 ```
 
 ## Usage
 
-1. Place the script in the folder containing the images to filter
-2. Modify the path in the `source_dir` variable with your folder path:
-```python
-source_dir = r"C:\image-filter"  # Modify this path
-```
-3. Run the script:
+1. Place the script in the folder containing the images you want to filter
+2. Run the script:
 ```bash
-python image_filter.py
+python image-filter.py
 ```
 
-The script will automatically create an "ok" subfolder and copy all images meeting the size requirements into it.
+The script will automatically:
+- Create an "ok" subfolder in the current directory
+- Copy all images meeting the size requirements into it
+- Process files in parallel for faster execution
 
 ## Output
 
 During execution, the script will display:
 - Name and dimensions of each copied image
 - Any errors encountered during the process
-- Completion message
+- Completion message when finished
 
 ## Notes
 
-- The script does not modify or delete the original files
-- Images are copied, not moved, allowing the original archive to remain intact
+- The script doesn't modify or delete original files
+- Images are copied, not moved, preserving the original archive
 - Files with the same name in the destination folder will be overwritten
+- The script uses parallel processing to improve performance
 
 ## Tips
 
-- Before proceeding with dataset captioning, it is recommended to check the contents of the "ok" folder
-- To change the minimum required size, modify the value `512` in the size check
+- Before proceeding with dataset captioning, it's recommended to verify the contents of the "ok" folder
+- The script automatically uses the current working directory, so no path configuration is needed
+- The minimum required size (512x512) is hardcoded in the script - modify the value in the code if you need different dimensions
