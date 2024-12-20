@@ -1,24 +1,25 @@
-# Image Size Filter Script
+# Script di Filtro Dimensioni Immagini
 
-Questo script Python è stato sviluppato per automatizzare il processo di selezione delle immagini durante la preparazione di dataset per l'addestramento di modelli LoRA. Filtra automaticamente le immagini in base alle loro dimensioni, copiando solo quelle che soddisfano i requisiti minimi in una cartella separata.
+Questo script Python automatizza il processo di selezione delle immagini filtrando in base alle loro dimensioni. Copia automaticamente le immagini che soddisfano i requisiti minimi di dimensione in una cartella separata, rendendolo particolarmente utile per la preparazione di dataset per l'addestramento di modelli LoRA.
 
-## Problema risolto
+## Problema Risolto
 
-Durante la raccolta di immagini per l'addestramento di modelli LoRA, spesso si scaricano intere gallerie di immagini che contengono file di dimensioni diverse. Il processo manuale di verifica e selezione delle immagini che soddisfano i requisiti minimi (512x512 pixel) può essere dispendioso in termini di tempo. Questo script automatizza completamente questo processo.
+Durante la raccolta di immagini per l'addestramento di modelli LoRA, spesso si scaricano intere gallerie contenenti file di dimensioni diverse. Questo script filtra automaticamente le immagini che soddisfano i requisiti minimi (512x512 pixel), eliminando la necessità di verifica manuale.
 
 ## Funzionalità
 
-- Analizza tutte le immagini nella cartella specificata
+- Analizza automaticamente tutte le immagini nella directory di lavoro corrente
 - Verifica che entrambe le dimensioni (larghezza e altezza) siano >= 512 pixel
 - Crea automaticamente una sottocartella "ok" per le immagini valide
 - Copia (non sposta) le immagini che soddisfano i requisiti nella cartella "ok"
 - Mantiene intatta la cartella originale
-- Fornisce feedback in tempo reale sulle operazioni eseguite
+- Fornisce feedback in tempo reale sulle operazioni
+- Elabora i file in parallelo per migliori prestazioni
 
 ## Requisiti
 
 - Python 3.x
-- Pillow (PIL) library
+- Libreria Pillow (PIL)
 - Sistema operativo: Windows/Linux/MacOS
 
 ## Installazione
@@ -32,16 +33,15 @@ pip install Pillow
 ## Utilizzo
 
 1. Posizionare lo script nella cartella contenente le immagini da filtrare
-2. Modificare il percorso nella variabile `source_dir` con il percorso della propria cartella:
-```python
-source_dir = r"C:\image-filter"  # Modificare questo percorso
-```
-3. Eseguire lo script:
+2. Eseguire lo script:
 ```bash
-python image_filter.py
+python image-filter.py
 ```
 
-Lo script creerà automaticamente una sottocartella "ok" e copierà al suo interno tutte le immagini che soddisfano i requisiti di dimensione.
+Lo script automaticamente:
+- Creerà una sottocartella "ok" nella directory corrente
+- Copierà tutte le immagini che soddisfano i requisiti di dimensione
+- Elaborerà i file in parallelo per un'esecuzione più veloce
 
 ## Output
 
@@ -54,9 +54,11 @@ Durante l'esecuzione, lo script mostrerà:
 
 - Lo script non modifica o elimina i file originali
 - Le immagini vengono copiate, non spostate, permettendo di mantenere l'archivio originale intatto
-- In caso di file con lo stesso nome nella cartella di destinazione, verranno sovrascritti
+- I file con lo stesso nome nella cartella di destinazione verranno sovrascritti
+- Lo script utilizza l'elaborazione parallela per migliorare le prestazioni
 
 ## Suggerimenti
 
 - Prima di procedere con il captioning del dataset, è consigliabile verificare il contenuto della cartella "ok"
-- Per modificare la dimensione minima richiesta, modificare il valore `512` nel controllo delle dimensioni
+- Lo script utilizza automaticamente la directory di lavoro corrente, quindi non è necessaria alcuna configurazione del percorso
+- La dimensione minima richiesta (512x512) è impostata nel codice - modificare il valore nello script se sono necessarie dimensioni diverse
