@@ -33,11 +33,7 @@ pip install Pillow
 ## Usage
 
 1. Place the script in the folder containing the images to filter
-2. Modify the path in the `source_dir` variable with your folder path:
-```python
-source_dir = r"C:\image-filter"  # Modify this path
-```
-3. Run the script:
+2. Run the script:
 ```bash
 python image_filter.py
 ```
